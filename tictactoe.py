@@ -37,17 +37,30 @@ def floor(value):
 
 state = {'player': 0}
 players = [drawx, drawo]
+board = [None] * 9
 
 
 def tap(x, y):
     """Maneja el clic en el tablero."""
     x = floor(x)
     y = floor(y)
+    col = int((x + 200) // 133)
+    row = int((y + 200) // 133)
+
+    if col not in range(3) or row not in range(3):
+        return
+
+    index = row * 3 + col
+
+    if board[index] is not None:
+        return
+
     player = state['player']
     draw = players[player]
     draw(x, y)
+    board[index] = player
     update()
-    state['player'] = not player
+    state['player'] = 1 - player
 
 
 setup(420, 420, 370, 0)
