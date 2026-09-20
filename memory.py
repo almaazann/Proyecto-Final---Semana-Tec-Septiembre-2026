@@ -21,8 +21,8 @@ car = path('car.gif')
 # Se crean pares de números para formar las tarjetas de memoria
 tiles = list(range(32)) * 2
 
-# Guarda temporalmente la primera ficha seleccionada
-state = {'mark': None}
+# Guarda la ficha seleccionada y el numero de movimientos realizados
+state = {'mark': None, 'moves': 0}
 
 # Indica qué fichas permanecen ocultas
 hide = [True] * 64
@@ -53,6 +53,10 @@ def xy(count):
 # Esta función controla lo que ocurre cuando el jugador selecciona una ficha
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+    # Aumenta el contador cada vez que el jugador selecciona una ficha
+    state['moves'] += 1
+    print('Movimientos:', state['moves'])
+
     spot = index(x, y)
     mark = state['mark']
 
