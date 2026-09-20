@@ -14,9 +14,17 @@ from turtle import *
 
 from freegames import path
 
+
+# Imagen utilizada para representar las fichas del juego
 car = path('car.gif')
+
+# Se crean pares de números para formar las tarjetas de memoria
 tiles = list(range(32)) * 2
+
+# Guarda temporalmente la primera ficha seleccionada
 state = {'mark': None}
+
+# Indica qué fichas permanecen ocultas
 hide = [True] * 64
 
 
@@ -42,7 +50,7 @@ def xy(count):
     """Convert tiles count to (x, y) coordinates."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
-
+# Esta función controla lo que ocurre cuando el jugador selecciona una ficha
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
     spot = index(x, y)
