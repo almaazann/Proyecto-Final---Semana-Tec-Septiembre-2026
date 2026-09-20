@@ -22,7 +22,7 @@ car = path('car.gif')
 tiles = list(range(32)) * 2
 
 # Guarda la ficha seleccionada y el numero de movimientos realizados
-state = {'mark': None, 'moves': 0}
+state = {'mark': None, 'pairs': 0}
 
 # Indica qué fichas permanecen ocultas
 hide = [True] * 64
@@ -54,12 +54,12 @@ def xy(count):
 # Esta función controla lo que ocurre cuando el jugador selecciona una ficha
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
-
-    # Aumenta el contador cada vez que el jugador selecciona una ficha
-    state['moves'] += 1
-    print('Movimientos:', state['moves'])
-
     spot = index(x, y)
+
+    # Evita errores si se hace clic fuera del tablero
+    if spot < 0 or spot >= len(tiles):
+        return
+
     mark = state['mark']
 
     # Guarda la primera ficha seleccionada o cambia la selección
@@ -71,9 +71,13 @@ def tap(x, y):
         hide[mark] = False
         state['mark'] = None
 
+        # Cuenta y muestra los pares descubiertos
+        state['pairs'] += 1
+        print('Pares descubiertos:', state['pairs'])
+
         # Comprueba si todas las fichas fueron descubiertas
         if not any(hide):
-            print('Juego completado en', state['moves'], 'movimientos')
+            print('Juego completado')
 
 
 def draw():
