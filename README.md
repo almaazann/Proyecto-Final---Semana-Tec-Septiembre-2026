@@ -1,6 +1,6 @@
 ## A01710198 - Naomi Cerino Resendiz
 
-Juego: Tic Tac Toe (freegames)
+Juego: Tic Tac Toe
 
 Cambios realizados:
 - Modificación del tamaño, color y centrado de los símbolos "X" y "O".
