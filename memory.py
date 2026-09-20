@@ -50,9 +50,11 @@ def xy(count):
     """Convert tiles count to (x, y) coordinates."""
     return (count % 8) * 50 - 200, (count // 8) * 50 - 200
 
+
 # Esta función controla lo que ocurre cuando el jugador selecciona una ficha
 def tap(x, y):
     """Update mark and hidden tiles based on tap."""
+
     # Aumenta el contador cada vez que el jugador selecciona una ficha
     state['moves'] += 1
     print('Movimientos:', state['moves'])
@@ -60,12 +62,18 @@ def tap(x, y):
     spot = index(x, y)
     mark = state['mark']
 
+    # Guarda la primera ficha seleccionada o cambia la selección
     if mark is None or mark == spot or tiles[mark] != tiles[spot]:
         state['mark'] = spot
     else:
+        # Si las dos fichas coinciden, permanecen descubiertas
         hide[spot] = False
         hide[mark] = False
         state['mark'] = None
+
+        # Comprueba si todas las fichas fueron descubiertas
+        if not any(hide):
+            print('Juego completado en', state['moves'], 'movimientos')
 
 
 def draw():
@@ -101,3 +109,4 @@ tracer(False)
 onscreenclick(tap)
 draw()
 done()
+
