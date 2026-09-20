@@ -1,20 +1,11 @@
-"""Tic Tac Toe
-
-Exercises
-
-1. Give the X and O a different color and width.
-2. What happens when someone taps a taken spot?
-3. How would you detect when someone has won?
-4. How could you create a computer player?
-"""
+"""Tic Tac Toe."""
 
 from turtle import *
-
 from freegames import line
 
 
 def grid():
-    """Draw tic-tac-toe grid."""
+    """Dibuja el tablero."""
     line(-67, 200, -67, -200)
     line(67, 200, 67, -200)
     line(-200, -67, 200, -67)
@@ -22,21 +13,25 @@ def grid():
 
 
 def drawx(x, y):
-    """Draw X player."""
-    line(x, y, x + 133, y + 133)
-    line(x, y + 133, x + 133, y)
+    """Dibuja la X."""
+    color('blue')
+    width(8)
+    line(x + 25, y + 25, x + 108, y + 108)
+    line(x + 25, y + 108, x + 108, y + 25)
 
 
 def drawo(x, y):
-    """Draw O player."""
+    """Dibuja la O."""
+    color('red')
+    width(8)
     up()
-    goto(x + 67, y + 5)
+    goto(x + 66.5, y + 66.5 - 42)
     down()
-    circle(62)
+    circle(42)
 
 
 def floor(value):
-    """Round value down to grid with square size 133."""
+    """Redondea la coordenada al tablero."""
     return ((value + 200) // 133) * 133 - 200
 
 
@@ -45,7 +40,7 @@ players = [drawx, drawo]
 
 
 def tap(x, y):
-    """Draw X or O in tapped square."""
+    """Maneja el clic en el tablero."""
     x = floor(x)
     y = floor(y)
     player = state['player']
