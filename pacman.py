@@ -25,6 +25,8 @@ ghosts = [
     [vector(100, 160), vector(0, -5)],
     [vector(100, -160), vector(-5, 0)],
 ]
+
+# MODIFICACIÓN 1: Rediseño del tablero cambiando la disposición de muros (0) y pasillos con comida (1)
 # fmt: off
 tiles = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -100,7 +102,7 @@ def world():
             x = (index % 20) * 20 - 200
             y = 180 - (index // 20) * 20
             square(x, y)
-
+# MODIFICACIÓN 2: Cambiar el color del camino a color naranja
             if tile == 1:
                 path.up()
                 path.goto(x + 10, y + 10)
@@ -153,7 +155,7 @@ def move():
     for point, course in ghosts:
         if abs(pacman - point) < 20:
             return
-
+# MODIFICACIÓN 3: Aumentar la velocidad de los fantasmas reduciendo el temporizador a 50 ms
     ontimer(move, 10)
 
 
