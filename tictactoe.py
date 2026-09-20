@@ -3,6 +3,7 @@
 from turtle import *
 from freegames import line
 
+# Combinaciones ganadoras (filas, columnas, diagonales)
 WINS = [
     (0, 1, 2), (3, 4, 5), (6, 7, 8),
     (0, 3, 6), (1, 4, 7), (2, 5, 8),
@@ -22,6 +23,7 @@ def drawx(x, y):
     """Dibuja la X."""
     color('blue')
     width(8)
+    # Centrar la X en la casilla
     line(x + 25, y + 25, x + 108, y + 108)
     line(x + 25, y + 108, x + 108, y + 25)
 
@@ -31,6 +33,7 @@ def drawo(x, y):
     color('red')
     width(8)
     up()
+    # Centrar el círculo en la casilla
     goto(x + 66.5, y + 66.5 - 42)
     down()
     circle(42)
@@ -72,7 +75,7 @@ def show_message(text):
 state = {'player': 0, 'game_over': False}
 players = [drawx, drawo]
 names = ['X', 'O']
-board = [None] * 9
+board = [None] * 9  # Guarda el estado de cada casilla
 
 
 def tap(x, y):
@@ -90,6 +93,7 @@ def tap(x, y):
 
     index = row * 3 + col
 
+    # Ignorar si la casilla ya está ocupada
     if board[index] is not None:
         return
 
@@ -98,6 +102,7 @@ def tap(x, y):
     draw(x, y)
     board[index] = player
 
+    # Validar si hay ganador o empate
     winner_player = winner()
 
     if winner_player is not None:
